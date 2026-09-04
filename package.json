@@ -11,7 +11,7 @@
     "build": "vinext build",
     "build:pages": "node scripts/build-github-pages.mjs",
     "predeploy": "npm run build:pages",
-    "deploy": "gh-pages -d dist/client",
+    "deploy": "gh-pages -d dist/client --nojekyll",
     "start": "wrangler dev --config dist/server/wrangler.json",
     "lint": "oxlint",
     "format": "oxfmt"
