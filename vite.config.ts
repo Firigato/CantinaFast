@@ -6,6 +6,7 @@ import hostingConfig from './.openai/hosting.json';
 
 const SITE_CREATOR_PLACEHOLDER_DATABASE_ID =
   '00000000-0000-4000-8000-000000000000';
+const DEFAULT_BASE_PATH = '/';
 
 const { d1, r2 } = hostingConfig;
 
@@ -45,6 +46,9 @@ export default defineConfig(async () => {
   const { cloudflare } = await import('@cloudflare/vite-plugin');
 
   return {
+    // GitHub Pages serves project sites from a repository subdirectory. The
+    // Pages build sets VITE_BASE_PATH while the regular Sites build stays at /.
+    base: process.env.VITE_BASE_PATH ?? DEFAULT_BASE_PATH,
     css: { postcss: { plugins: [tailwindcss()] } },
     server: isCodexSeatbeltSandbox
       ? { watch: { useFsEvents: false, usePolling: true } }
